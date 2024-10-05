@@ -31,7 +31,7 @@ show("hello, world")
 
 for variable
 
-show(<your variable>)
+show(<your variable!>)
 
 •va (this command creates a variable) va command example: 
 va hello = "hello, world"
