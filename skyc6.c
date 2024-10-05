@@ -28,19 +28,21 @@ int func_count = 0;
 // Function prototypes
 void assign_variable(char* line);
 void show(char* line);
-void define_function(char* lines[], int* i);
-void handle_if(char* lines[], int* i);
-void handle_for(char* lines[], int* i);
-void handle_while(char* lines[], int* i);
+void define_function(char lines[MAX_LINES][100], int* i);
+void handle_if(char lines[MAX_LINES][100], int* i);
+void handle_for(char lines[MAX_LINES][100], int* i);
+void handle_while(char lines[MAX_LINES][100], int* i);
 void input_variable(char* line);
 void call_function(char* line);
-void interpret(char* lines[], int line_count);
+void interpret(char lines[MAX_LINES][100], int line_count);
 void run_sky_code(const char* file_path);
-void print(char* line); // Prototype for the print function
+char* read_file(const char* file_path); // Prototypes for additional functions
+void free_memory(void);
+void print(char* line);
 
 // Additional prototypes for new features
-void handle_try_except(char* lines[], int* i);
-void handle_loop_control(char* lines[], int* i);
+void handle_try_except(char lines[MAX_LINES][100], int* i);
+void handle_loop_control(char lines[MAX_LINES][100], int* i);
 void handle_list_and_string_methods(char* line);
 void handle_dict_methods(char* line);
 void handle_object_and_class(char* line);
@@ -51,7 +53,7 @@ void handle_byte_operations(char* line);
 void handle_special_methods(char* line);
 void handle_data_types(char* line);
 
-void interpret(char* lines[], int line_count) {
+void interpret(char lines[MAX_LINES][100], int line_count) {
     for (int i = 0; i < line_count; i++) {
         char* line = lines[i];
         if (strncmp(line, "va ", 3) == 0) {
@@ -124,7 +126,7 @@ void show(char* line) {
     }
 }
 
-void define_function(char* lines[], int* i) {
+void define_function(char lines[MAX_LINES][100], int* i) {
     char func_name[50];
     if (sscanf(lines[*i], "func %s", func_name) == 1) {
         strcpy(functions[func_count].func_name, func_name);
@@ -142,7 +144,7 @@ void define_function(char* lines[], int* i) {
     }
 }
 
-void handle_if(char* lines[], int* i) {
+void handle_if(char lines[MAX_LINES][100], int* i) {
     char condition[50];
     if (sscanf(lines[*i], "if %s", condition) == 1) {
         // Just as an example, assume condition is always true
@@ -156,7 +158,7 @@ void handle_if(char* lines[], int* i) {
     }
 }
 
-void handle_for(char* lines[], int* i) {
+void handle_for(char lines[MAX_LINES][100], int* i) {
     char var_name[50];
     int start, end;
     if (sscanf(lines[*i], "for %s in range(%d, %d)", var_name, &start, &end) == 3) {
@@ -175,7 +177,7 @@ void handle_for(char* lines[], int* i) {
     }
 }
 
-void handle_while(char* lines[], int* i) {
+void handle_while(char lines[MAX_LINES][100], int* i) {
     char condition[50];
     if (sscanf(lines[*i], "while %s", condition) == 1) {
         // Assume condition is always true for simplicity
@@ -205,39 +207,26 @@ void input_variable(char* line) {
 
 void call_function(char* line) {
     char func_name[50];
-    sscanf(line, "%s", func_name);
-    for (int i = 0; i < func_count; i++) {
-        if (strcmp(functions[i].func_name, func_name) == 0) {
-            interpret(functions[i].func_body, functions[i].line_count);
-            return;
+    if (sscanf(lines[*i], "func %s", func_name) == 1) {
+        strcpy(functions[func_count].func_name, func_name);
+        (*i)++;
+        int line_count = 0;
+        while (strcmp(lines[*i], "end") != 0) {
+            strcpy(functions[func_count].func_body[line_count], lines[*i]);
+            line_count++;
+            (*i)++;
         }
-    }
-    printf("Function %s not found.\n", func_name);
-}
-
-void print(char* line) {
-    char var_name[50];
-    if (sscanf(line, "print %s", var_name) == 1) {
-        for (int i = 0; i < var_count; i++) {
-            if (strcmp(variables[i].var_name, var_name) == 0) {
-                printf("%s\n", variables[i].value);
-                return;
-            }
-        }
-        printf("Variable %s not found.\n", var_name);
+        functions[func_count].line_count = line_count;
+        func_count++;
     } else {
-        printf("Error in print command.\n");
+        printf("Error in function definition.\n");
     }
 }
 
-void run_sky_code(const char* file_path) {
-    FILE* file = fopen(file_path, "r");
-    if (file == NULL) {
-        printf("Error opening file: %s\n", file_path);
-        return;
-    }
+// ... (phần còn lại của mã không thay đổi)
 
-    char* read_file(const char* file_path) {
+// Hàm đọc tệp
+char* read_file(const char* file_path) {
     FILE* file = fopen(file_path, "r");
     if (!file) {
         printf("Error opening file: %s\n", file_path);
@@ -261,16 +250,16 @@ void run_sky_code(const char* file_path) {
     return content;
 }
 
+// Hàm giải phóng bộ nhớ
 void free_memory() {
-    // Giải phóng bộ nhớ cho các biến và hàm đã định nghĩa
+    // Giải phóng bộ nhớ cho các biến
     for (int i = 0; i < var_count; i++) {
-        free(variables[i].var_name);
-        free(variables[i].value);
+        // Chúng ta không cần giải phóng tên biến và giá trị vì chúng là mảng cố định
     }
     for (int i = 0; i < func_count; i++) {
-        free(functions[i].func_name);
+        // Không cần giải phóng func_name vì nó là mảng cố định
         for (int j = 0; j < functions[i].line_count; j++) {
-            free(functions[i].func_body[j]);
+            // Không cần giải phóng func_body[j] vì nó là mảng cố định
         }
     }
 }
@@ -305,12 +294,11 @@ int main(int argc, char* argv[]) {
 
     interpret(lines, line_count);
 
-    // Giải phóng bộ nhớ đã cấp phát
+    // Giải phóng bộ nhớ
     for (int i = 0; i < line_count; i++) {
-        free(lines[i]);
+        free(lines[i]); // Giải phóng từng dòng được sao chép
     }
-    free(code_content);
-    free_memory();
+    free(code_content); // Giải phóng nội dung tệp đã đọc
 
     return 0;
 }
