@@ -1,2 +1,1 @@
-# Sky-script-project
-Here is github sky script 
+HERE IS GITHUB FOR SKY SCRIPT 
