@@ -14,9 +14,10 @@ git clone https://github.com/Huyalexdev2/Sky-script-project/
 
 cd Sky-script-project
 
-clang -o skyc6 skyc6.c
+clang -o skyc7 skyc7.c
 
-./skyc6 <your-sky-script-file>
+now you can use!
+./skyc7 <your-sky-script-file>
 
 • HOW TO USE IT
 Here is all command!
