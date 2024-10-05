@@ -1,13 +1,19 @@
 Here is github sky script!
+
 •WHAT IS SKY SCRIPT?
 sky script is a programming language for beginners and it is created by me Huy or you can call me alex! This project was created 3 months ago! it was created in C!
+
 •HOW TO INSTALL SKY SCRIPT?
 for termux and linux:
 
 pkg install clang -y
+
 pkg install git -y
+
 git clone https://github.com/Huyalexdev2/Sky-script-project/
+
 cd Sky-script-project
+
 clang -o skyc6 skyc6.c
 
 ./skyc6 <your-sky-script-file>
