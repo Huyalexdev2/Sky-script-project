@@ -16,6 +16,7 @@ git clone https://github.com/Huyalexdev2/Sky-script-project/
 cd Sky-script-project
 
 now you can use!
+
 using command: python sky.py <your sky script file>
 
 for windows
