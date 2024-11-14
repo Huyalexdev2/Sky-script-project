@@ -1,12 +1,12 @@
 Here is github sky script!
 
 •WHAT IS SKY SCRIPT?
-sky script is a programming language for beginners and it is created by me Huy or you can call me alex! This project was created 3 months ago! it was created in C!
+sky script is a programming language for beginners and it is created by me Huy or you can call me alex! This project was created 3 months ago! it was created in C!(but now change to python)
 
 •HOW TO INSTALL SKY SCRIPT?
 for termux and linux:
 
-pkg install clang -y
+pkg install python -y
 
 pkg install git -y
 
@@ -14,42 +14,22 @@ git clone https://github.com/Huyalexdev2/Sky-script-project/
 
 cd Sky-script-project
 
-clang -o skyc7 skyc7.c
-
 now you can use!
-./skyc7 <your-sky-script-file>
+using command: python sky.py <your sky script file>
 
+for windows
+--install git and python
+
+git clone https://github.com/Huyalexdev2/Sky-script-project/
+
+cd Sky-script-project
+
+now you can use
+
+using command: python sky.py <your sky script file>
 • HOW TO USE IT
-Here is all command!
 
-•show (This command prints the contents and prints the contents in the variable)
-show command example:
 
-for str:
-
-show("hello, world")
-
-for variable
-
-show(<your variable!>)
-
-•va (this command creates a variable) va command example: 
-va hello = "hello, world"
-
-•func (This command creates a function)
-func command example:
-
-func myfunction:
-    show("hello, world")
-end
-
-•callfunc (This command calls a function)
- 
- callfunc command example:
-
-callfunc myfunction
-
-•end (This command ends a function or program)
 
 -Those are the most commonly used codes in sky code and there are many more codes but I will create a txt file to list them!
 
