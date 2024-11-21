@@ -7,7 +7,7 @@ sky script is a programming language for beginners and it is created by me Huy o
 
 for termux and linux:
 
-   ```bash
+```bash
 pkg install python -y
 
 pkg install git -y
@@ -15,23 +15,30 @@ pkg install git -y
 git clone https://github.com/Huyalexdev2/Sky-script-project/
 
 cd Sky-script-project
+```
 
 now you can use!
 
-using command: python sky.py <your sky script file>
-
+using command:
+```bash
+python sky.py <your sky script file>
+```
 for windows
 
---install git and python
+install git and python
 
+```bash
 git clone https://github.com/Huyalexdev2/Sky-script-project/
 
 cd Sky-script-project
+```
 
 now you can use
 
-using command: python sky.py <your sky script file>
-
+using command: 
+```bash
+python sky.py <your sky script file>
+```
 
 -Those are the most commonly used codes in sky code and there are many more codes but I will create a txt file to list them!
 
