@@ -7,6 +7,7 @@ sky script is a programming language for beginners and it is created by me Huy o
 
 for termux and linux:
 
+   ```bash
 pkg install python -y
 
 pkg install git -y
